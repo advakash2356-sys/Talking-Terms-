@@ -1,0 +1,6 @@
+{
+  "name": "Talking Terms",
+  "description": "Delhi NCR Voice-First Anonymous Offloading Engine with 20 AI Personas, Argon2id Zero-Knowledge Identity Shield, real-time voice call interaction, and self-hosted open-source batch stack generator.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

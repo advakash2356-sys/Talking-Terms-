@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+@layer base {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #07090e;
+    color: #f1f5f9;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Outfit', sans-serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  img, video, canvas {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07090e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Safe area insets for mobile edge-to-edge displays */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 1rem);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0.5rem);
+}
+
+/* Smooth glow utilities */
+.glow-saffron {
+  box-shadow: 0 0 35px -5px rgba(255, 107, 0, 0.35);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.35);
+}
+
+/* Simple, reliable native CSS animations (100% cross-browser & mobile performant) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes wavePulse {
+  0%, 100% {
+    transform: scaleY(0.4);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in,
+.animate-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+.animate-scale-in,
+.zoom-in-95 {
+  animation: scaleIn 0.2s ease-out forwards;
+}
+
+.animate-slide-up,
+.slide-in-from-bottom-2,
+.slide-in-from-bottom-3 {
+  animation: slideUp 0.25s ease-out forwards;
+}
+
+.animate-slide-down,
+.slide-in-from-top-2 {
+  animation: slideDown 0.25s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.animate-wave-pulse {
+  animation: wavePulse 1.2s ease-in-out infinite;
+}
+
+/* Quick Reactive Emoji Floating Animation */
+@keyframes floatReaction {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.5) rotate(0deg);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(calc(var(--rx, 0px) * 0.3), -25px) scale(1.25) rotate(calc(var(--rot, 0deg) * 0.5));
+  }
+  55% {
+    opacity: 0.95;
+    transform: translate(var(--rx, 0px), -85px) scale(1.1) rotate(var(--rot, 0deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(var(--rx, 0px) * 1.4), -160px) scale(0.8) rotate(calc(var(--rot, 0deg) * 1.5));
+  }
+}
+
+.animate-float-reaction {
+  animation: floatReaction 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Avatar Reaction Pulse Animation */
+@keyframes avatarReactionPulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0px rgba(245, 158, 11, 0));
+  }
+  30% {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 30px rgba(245, 158, 11, 0.75));
+  }
+  70% {
+    transform: scale(0.98);
+    filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.35));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0px rgba(245, 158, 11, 0));
+  }
+}
+
+.avatar-reaction-active {
+  animation: avatarReactionPulse 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Mobile Landscape Specific Adjustments */
+@media (orientation: landscape) and (max-height: 550px) {
+  .landscape-compact-header {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+  .landscape-compact-modal {
+    max-height: 96vh !important;
+    height: 96vh !important;
+  }
+}
+
