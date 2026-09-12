@@ -28,8 +28,8 @@ import { ShieldIdentity } from '../types';
 import { ambientSoundEngine } from '../utils/ambientSynth';
 
 interface NavbarProps {
-  activeTab: 'voice-agent' | 'personas' | 'mukherjee' | 'voice-studio' | 'intelligence' | 'ceo' | 'listener' | 'shield' | 'docker' | 'feed' | 'diagnostic';
-  setActiveTab: (tab: 'voice-agent' | 'personas' | 'mukherjee' | 'voice-studio' | 'intelligence' | 'ceo' | 'listener' | 'shield' | 'docker' | 'feed' | 'diagnostic') => void;
+  activeTab: 'express' | 'voice-agent' | 'personas' | 'mukherjee' | 'voice-studio' | 'intelligence' | 'ceo' | 'listener' | 'shield' | 'docker' | 'feed' | 'diagnostic';
+  setActiveTab: (tab: 'express' | 'voice-agent' | 'personas' | 'mukherjee' | 'voice-studio' | 'intelligence' | 'ceo' | 'listener' | 'shield' | 'docker' | 'feed' | 'diagnostic') => void;
   identity: ShieldIdentity;
   onOpenShieldModal: () => void;
   onOpenVoiceCreditsModal: () => void;
@@ -63,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
-  const handleTabClick = (tab: 'voice-agent' | 'personas' | 'mukherjee' | 'voice-studio' | 'intelligence' | 'ceo' | 'listener' | 'shield' | 'docker' | 'feed' | 'diagnostic') => {
+  const handleTabClick = (tab: 'express' | 'voice-agent' | 'personas' | 'mukherjee' | 'voice-studio' | 'intelligence' | 'ceo' | 'listener' | 'shield' | 'docker' | 'feed' | 'diagnostic') => {
     if (navigator.vibrate) navigator.vibrate(30);
     setActiveTab(tab);
     setShowMoreMenu(false);
@@ -80,7 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             
             {/* BRAND LOGO */}
             <div
-              onClick={() => handleTabClick('personas')}
+              onClick={() => handleTabClick('express')}
               className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group select-none min-h-[44px]"
             >
               <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-yellow-400 p-[1.5px] shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform shrink-0">
@@ -299,86 +299,99 @@ export const Navbar: React.FC<NavbarProps> = ({
               
               <button
                 type="button"
-                onClick={() => handleTabClick('voice-agent')}
+                onClick={() => handleTabClick('express')}
                 className={`flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
-                  activeTab === 'voice-agent'
-                    ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 shadow-lg shadow-orange-500/25 scale-[1.02]'
-                    : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-850 border border-slate-800/80'
+                  activeTab === 'express'
+                    ? 'bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-400 text-slate-950 shadow-lg shadow-orange-500/30 scale-[1.02]'
+                    : 'bg-orange-500/10 text-orange-300 hover:text-white hover:bg-orange-500/20 border border-orange-500/40'
                 }`}
               >
-                <Bot className="w-3.5 h-3.5 text-amber-400" />
-                <span>Voice Agent (Dadaji / Brother / AI)</span>
+                <Zap className="w-3.5 h-3.5 fill-current animate-pulse" />
+                <span>⚡ Express Vent (2-4 Steps)</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleTabClick('personas')}
-                className={`flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
+                className={`flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
                   activeTab === 'personas'
                     ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 shadow-lg shadow-orange-500/25 scale-[1.02]'
                     : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-850 border border-slate-800/80'
                 }`}
               >
                 <Mic className="w-3.5 h-3.5" />
-                <span>Talk with Peers</span>
+                <span>20 Personas</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleTabClick('voice-agent')}
+                className={`flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
+                  activeTab === 'voice-agent'
+                    ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 shadow-lg shadow-orange-500/25 scale-[1.02]'
+                    : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-850 border border-slate-800/80'
+                }`}
+              >
+                <Bot className="w-3.5 h-3.5 text-amber-400" />
+                <span>Voice Agent</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleTabClick('mukherjee')}
-                className={`flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
+                className={`flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
                   activeTab === 'mukherjee'
                     ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 shadow-lg shadow-orange-500/25 scale-[1.02]'
                     : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-850 border border-slate-800/80'
                 }`}
               >
                 <MapPin className="w-3.5 h-3.5 text-amber-400" />
-                <span>Mukherjee Nagar Hub</span>
+                <span>Mukherjee Nagar</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleTabClick('feed')}
-                className={`flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
+                className={`flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
                   activeTab === 'feed'
                     ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 shadow-lg shadow-orange-500/25 scale-[1.02]'
                     : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-850 border border-slate-800/80'
                 }`}
               >
                 <Flame className="w-3.5 h-3.5 text-orange-400" />
-                <span>Live Feed</span>
+                <span>Feed</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleTabClick('intelligence')}
-                className={`flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
+                className={`flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
                   activeTab === 'intelligence'
                     ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 shadow-lg shadow-orange-500/25 scale-[1.02]'
                     : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-850 border border-slate-800/80'
                 }`}
               >
                 <Zap className="w-3.5 h-3.5 text-amber-400" />
-                <span>Voice Capture & Router</span>
+                <span>Router</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleTabClick('voice-studio')}
-                className={`flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
+                className={`flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
                   activeTab === 'voice-studio'
                     ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 shadow-lg shadow-orange-500/25 scale-[1.02]'
                     : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-850 border border-slate-800/80'
                 }`}
               >
                 <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>TTS Studio</span>
+                <span>TTS</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleTabClick('diagnostic')}
-                className={`flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
+                className={`flex items-center gap-2 px-3 py-2 min-h-[44px] rounded-2xl text-xs font-black transition-all uppercase tracking-wider ${
                   activeTab === 'diagnostic'
                     ? 'bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 text-slate-950 shadow-lg shadow-orange-500/25 scale-[1.02]'
                     : 'bg-slate-900/80 text-rose-300 hover:text-white hover:bg-slate-850 border border-rose-900/50'
@@ -406,7 +419,35 @@ export const Navbar: React.FC<NavbarProps> = ({
       >
         <div className="grid grid-cols-5 items-center px-1 py-1.5 text-center">
           
-          {/* TAB 1: VOICE AGENT */}
+          {/* TAB 1: EXPRESS VENT (2-4 STEPS) */}
+          <button
+            type="button"
+            onClick={() => handleTabClick('express')}
+            className={`flex flex-col items-center justify-center py-2 px-1 rounded-2xl transition-all select-none min-h-[50px] ${
+              activeTab === 'express'
+                ? 'text-amber-400 font-bold bg-amber-500/15'
+                : 'text-orange-400/80 hover:text-orange-300'
+            }`}
+          >
+            <Zap className={`w-5 h-5 mb-1 ${activeTab === 'express' ? 'text-amber-400 fill-amber-400 scale-110' : 'text-orange-400'}`} />
+            <span className="text-[10px] leading-none font-bold">Express</span>
+          </button>
+
+          {/* TAB 2: PERSONAS */}
+          <button
+            type="button"
+            onClick={() => handleTabClick('personas')}
+            className={`flex flex-col items-center justify-center py-2 px-1 rounded-2xl transition-all select-none min-h-[50px] ${
+              activeTab === 'personas'
+                ? 'text-orange-400 font-bold bg-orange-500/10'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Mic className={`w-5 h-5 mb-1 ${activeTab === 'personas' ? 'text-orange-400 scale-110' : 'text-slate-400'}`} />
+            <span className="text-[10px] leading-none font-medium">Personas</span>
+          </button>
+
+          {/* TAB 3: VOICE AGENT */}
           <button
             type="button"
             onClick={() => handleTabClick('voice-agent')}
@@ -417,35 +458,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Bot className={`w-5 h-5 mb-1 ${activeTab === 'voice-agent' ? 'text-orange-400 scale-110' : 'text-slate-400'}`} />
-            <span className="text-[10px] leading-none font-medium">AI Agent</span>
-          </button>
-
-          {/* TAB 2: STUDIO */}
-          <button
-            type="button"
-            onClick={() => handleTabClick('voice-studio')}
-            className={`flex flex-col items-center justify-center py-2 px-1 rounded-2xl transition-all select-none min-h-[50px] ${
-              activeTab === 'voice-studio'
-                ? 'text-orange-400 font-bold bg-orange-500/10'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <Sparkles className={`w-5 h-5 mb-1 ${activeTab === 'voice-studio' ? 'text-orange-400 scale-110' : 'text-slate-400'}`} />
-            <span className="text-[10px] leading-none font-medium">Studio</span>
-          </button>
-
-          {/* TAB 3: MUKHERJEE HUB */}
-          <button
-            type="button"
-            onClick={() => handleTabClick('mukherjee')}
-            className={`flex flex-col items-center justify-center py-2 px-1 rounded-2xl transition-all select-none min-h-[50px] ${
-              activeTab === 'mukherjee'
-                ? 'text-orange-400 font-bold bg-orange-500/10'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <MapPin className={`w-5 h-5 mb-1 ${activeTab === 'mukherjee' ? 'text-rose-400 scale-110' : 'text-slate-400'}`} />
-            <span className="text-[10px] leading-none font-medium">Hub</span>
+            <span className="text-[10px] leading-none font-medium">Voice</span>
           </button>
 
           {/* TAB 4: LIVE FEED */}
@@ -467,7 +480,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             type="button"
             onClick={() => setShowMoreMenu(!showMoreMenu)}
             className={`flex flex-col items-center justify-center py-2 px-1 rounded-2xl transition-all select-none min-h-[50px] ${
-              showMoreMenu || activeTab === 'ceo' || activeTab === 'listener' || activeTab === 'shield' || activeTab === 'docker'
+              showMoreMenu || activeTab === 'ceo' || activeTab === 'listener' || activeTab === 'shield' || activeTab === 'docker' || activeTab === 'mukherjee' || activeTab === 'voice-studio' || activeTab === 'intelligence'
                 ? 'text-purple-400 font-bold bg-purple-500/10'
                 : 'text-slate-400 hover:text-slate-200'
             }`}

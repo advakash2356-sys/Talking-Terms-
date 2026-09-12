@@ -18,12 +18,13 @@ import { RawAudioDiagnostic } from './components/RawAudioDiagnostic';
 import { ConversationalVoiceEngine } from './components/ConversationalVoiceEngine';
 import { CrisisHelplineModal } from './components/CrisisHelplineModal';
 import { LegalTermsModal } from './components/LegalTermsModal';
+import { GenZExpressVent } from './components/GenZExpressVent';
 import { PERSONAS_DATA } from './data/personas';
 import { Persona, ShieldIdentity, BlindToken } from './types';
 import { preCacheAllPersonaSprites } from './utils/personaSprites';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'voice-agent' | 'personas' | 'mukherjee' | 'voice-studio' | 'intelligence' | 'ceo' | 'listener' | 'shield' | 'docker' | 'feed' | 'diagnostic'>('voice-agent');
+  const [activeTab, setActiveTab] = useState<'express' | 'voice-agent' | 'personas' | 'mukherjee' | 'voice-studio' | 'intelligence' | 'ceo' | 'listener' | 'shield' | 'docker' | 'feed' | 'diagnostic'>('express');
   const [activeCallPersona, setActiveCallPersona] = useState<Persona | null>(null);
   const [showShieldModal, setShowShieldModal] = useState(false);
   const [showCreditsModal, setShowCreditsModal] = useState(false);
@@ -138,6 +139,17 @@ export default function App() {
 
       {/* MAIN CONTENT AREA */}
       <main className="pb-28 md:pb-16 relative z-10">
+        {activeTab === 'express' && (
+          <GenZExpressVent
+            identity={identity}
+            onStartCall={handleConnectCall}
+            onOpenVoiceEngine={() => setActiveTab('voice-agent')}
+            onOpenPersonasGrid={() => setActiveTab('personas')}
+            onOpenHelpline={() => setShowCrisisModal(true)}
+            onOpenCreditsModal={() => setShowCreditsModal(true)}
+          />
+        )}
+
         {activeTab === 'voice-agent' && (
           <div className="w-full flex items-center justify-center p-0 sm:p-4">
             <ConversationalVoiceEngine
