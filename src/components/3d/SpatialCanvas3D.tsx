@@ -4,15 +4,35 @@ import { Sparkles, Eye, Sliders } from 'lucide-react';
 
 interface SpatialCanvas3DProps {
   interactive?: boolean;
+  engineState: 'idle' | 'listening' | 'thinking' | 'speaking';
 }
 
 type BackgroundTheme = 'delhi_cyber' | 'saffron_flame' | 'emerald_matrix' | 'cosmic_violet';
 
-export const SpatialCanvas3D: React.FC<SpatialCanvas3DProps> = ({ interactive = true }) => {
+export const SpatialCanvas3D: React.FC<SpatialCanvas3DProps> = ({ interactive = true, engineState }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [theme, setTheme] = useState<BackgroundTheme>('delhi_cyber');
   const [showControls, setShowControls] = useState(false);
   const [intensity, setIntensity] = useState(1);
+
+  // Update intensity based on state
+  useEffect(() => {
+    switch (engineState) {
+      case 'listening':
+        setIntensity(2.5); // More active
+        break;
+      case 'thinking':
+        setIntensity(1.5); // Pulse
+        break;
+      case 'speaking':
+        setIntensity(3.0); // High activity
+        break;
+      case 'idle':
+      default:
+        setIntensity(1.0); // Baseline
+        break;
+    }
+  }, [engineState]);
 
   const themeRef = useRef(theme);
   const intensityRef = useRef(intensity);

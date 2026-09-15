@@ -32,6 +32,7 @@ export default function App() {
   const [showCrisisModal, setShowCrisisModal] = useState(false);
   const [showLegalModal, setShowLegalModal] = useState(false);
   const [escalationPersona, setEscalationPersona] = useState<Persona | null>(null);
+  const [engineState, setEngineState] = useState<'idle' | 'listening' | 'thinking' | 'speaking'>('idle');
 
   // Pre-cache all persona sprite assets on initial load to ensure instant zero-latency emotion switches
   useEffect(() => {
@@ -123,7 +124,7 @@ export default function App() {
     <div className="min-h-screen bg-[#07090E] text-slate-100 font-sans selection:bg-orange-500 selection:text-black relative overflow-x-hidden">
       
       {/* 3D SPATIAL PARTICLES & HOLOGRAPHIC GEOMETRIES CANVAS */}
-      <SpatialCanvas3D />
+      <SpatialCanvas3D engineState={engineState} />
 
       {/* NAVBAR */}
       <Navbar
@@ -155,6 +156,8 @@ export default function App() {
             <ConversationalVoiceEngine
               onOpenCrisisHelpline={() => setShowCrisisModal(true)}
               onOpenLegalModal={() => setShowLegalModal(true)}
+              engineState={engineState}
+              setEngineState={setEngineState}
             />
           </div>
         )}

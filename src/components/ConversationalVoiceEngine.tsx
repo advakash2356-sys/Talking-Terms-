@@ -161,11 +161,15 @@ export interface ChatMessage {
 export interface ConversationalVoiceEngineProps {
   onOpenCrisisHelpline?: () => void;
   onOpenLegalModal?: () => void;
+  engineState: 'idle' | 'listening' | 'thinking' | 'speaking';
+  setEngineState: (state: 'idle' | 'listening' | 'thinking' | 'speaking') => void;
 }
 
 export const ConversationalVoiceEngine: React.FC<ConversationalVoiceEngineProps> = ({
   onOpenCrisisHelpline,
   onOpenLegalModal,
+  engineState,
+  setEngineState,
 }) => {
   // 1. Persona State
   const [selectedPersonaId, setSelectedPersonaId] = useState<string>('kabir_upsc');
@@ -201,8 +205,8 @@ export const ConversationalVoiceEngine: React.FC<ConversationalVoiceEngineProps>
     return DEFAULT_PERSONAS[0];
   }, [selectedPersonaId]);
 
-  // 2. Loop State Machine: 'idle' | 'listening' | 'thinking' | 'speaking'
-  const [engineState, setEngineState] = useState<'idle' | 'listening' | 'thinking' | 'speaking'>('idle');
+  // 2. Loop State Machine: lifted up to props
+  // const [engineState, setEngineState] = useState<'idle' | 'listening' | 'thinking' | 'speaking'>('idle');
   const [liveTranscript, setLiveTranscript] = useState<string>('');
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
