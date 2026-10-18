@@ -154,3 +154,12 @@ npm run clean
 ├── server.ts
 ├── tsconfig.json
 └── vite.config.ts
+
+## Add your API key
+
+AI features need a Gemini API key (free at https://aistudio.google.com/apikey). Two ways:
+
+1. **In the app (recommended):** click the **Enter your API key** button (bottom-right). The key field is masked (Show/Hide toggle) and has a **Remove key** button.
+2. **Server env var:** set `GEMINI_API_KEY` in `.env.local` / your host's secrets (see `.env.example`).
+
+**Privacy:** a key entered in the app is stored only in your own browser (localStorage). It is never committed to git and never logged. It is attached only to requests to this app's own server, held in memory for that request, and forwarded straight to Google's Gemini API. Click **Remove key** to delete it at any time.

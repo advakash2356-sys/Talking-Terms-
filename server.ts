@@ -1,4 +1,5 @@
 import express from "express";
+import { userKeyMiddleware } from "./server/userKey";
 import path from "path";
 import { GoogleGenAI, Type } from "@google/genai";
 import { createServer as createViteServer } from "vite";
@@ -15,6 +16,7 @@ dotenv.config();
 const app = express();
 const PORT = 3000;
 
+app.use(userKeyMiddleware);
 app.use(express.json());
 
 

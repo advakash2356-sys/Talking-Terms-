@@ -1,4 +1,5 @@
 import { GoogleGenAI, ThinkingLevel } from "@google/genai";
+import { resolveGeminiKey, hasRequestKey } from "./userKey";
 
 // Available models ordered from highest rate limit / lightest weight / free tier friendly
 export const PREFERRED_LIGHTWEIGHT_MODELS = [
@@ -10,6 +11,10 @@ export const PREFERRED_LIGHTWEIGHT_MODELS = [
 let cachedGeminiClient: GoogleGenAI | null = null;
 
 export function getGeminiClient(): GoogleGenAI | null {
+  if (hasRequestKey()) {
+    // Per-request user key: never cached across requests.
+    return new GoogleGenAI({ apiKey: resolveGeminiKey()!, httpOptions: { headers: { "User-Agent": "aistudio-build" } } });
+  }
   if (!cachedGeminiClient) {
     const apiKey = process.env.GEMINI_API_KEY;
     if (apiKey) {
